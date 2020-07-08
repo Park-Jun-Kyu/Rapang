@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+
+    <insert id="join">
+
+    insert into rapang_member(r_name,r_id,r_pw,email,receive,zip,address,phone,sms,tel,birth,lunar_solar,business) values(#{r_name},#{r_name},#{r_pw},
+    #{email},#{receive},#{zip},#{address},#{phone},#{sms},#{tel},#{birth},#{lunar_solar},#{business})
+
+
+    </insert>
+
+</mapper>
