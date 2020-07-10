@@ -235,7 +235,7 @@
                                     <c:when test="${today<end_date}">
                                 <li>
                                     <div class="img">
-                                        <a href="#"><img src="eventUpload/${event.thumbnail}" alt="진행중 이벤트" /></a>
+                                        <a href="event_view?event_no=${event.event_no}"><img src="eventUpload/${event.thumbnail}" alt="진행중 이벤트" /></a>
                                     </div>
                                     <div class="txt">
                                         <div class="subject">${event.title}</div>

@@ -13,7 +13,6 @@
 <body>
 
 <p>하이루 ㅋㅋ</p>
-qwewqewqeasdsadadsaddsd 테스트 깃허브 테스트중11:47 방금 보낸다 받아봐
-qwewqeqwewqeqwfedfafdsfdfafaadsf
+
 </body>
 </html>

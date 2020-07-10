@@ -12,4 +12,33 @@
 
     </select>
 
+    <select id="event_view" resultType="EventDTO">
+
+        select * from EVENT where event_no=#{event_no}
+
+    </select>
+
+    <select id="commentList" resultType="RapangCommentDTO">
+
+        select * from RAPANG_COMMENT where event_no=#{event_no} order by comment_no desc
+
+    </select>
+     <insert id="commentWrite">
+
+        insert into RAPANG_COMMENT values(COMMENT_SEQ.nextval,#{event_no},#{r_id},#{content},sysdate)
+
+      </insert>
+
+    <delete id="commentDelete">
+        delete from RAPANG_COMMENT where comment_no=#{comment_no}
+
+    </delete>
+
+    <update id="commentModify">
+        update RAPANG_COMMENT set content=#{content} where comment_no=#{comment_no}
+
+    </update>
+
+
+
 </mapper>

@@ -69,52 +69,201 @@
     });
 
 
+
     function check(){
 
         var nameChk = /^[가-힣]{2,6}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
         var idChk = /^[a-zA-Z0-9]{4,12}$/;
-        var pwChk = /^(?=,*[a-zA-Z])(?=,*[0-9]).{4,20}$/;
+        // var pwChk = /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,20}$/; // 비밀번호 유효성검사
+        var pwChk = /^(?=.*[a-zA-Z])(?=.*[0-9]).{4,20}$/;
         var mailChk = /^[a-zA-Z0=9]{6,12}$/;
 
 
-        if(joinNow.r_name.value==""){
-            alert("이름을 입력하세요");
-            joinNow.r_name.focus();
-            return false;
+        // if(joinNow.r_name.value==""){
+        //     alert("이름을 입력하세요");
+        //     joinNow.r_name.focus();
+        //     return false;
+        //
+        // }
+        //
+        // if(!nameChk.test(joinNow.r_name.value)){
+        //     alert("이름은 한글로 2~6자로 입력하라우");
+        //     joinNow.r_name.value=="";
+        //     joinNow.r_name.focus;
+        //     return false;
+        //
+        // }
 
-        }
 
-        if(!nameChk.test(joinNow.r_name.value)){
-            alert("이름은 한글로 2~6자로 입력하라우");
-            joinNow.r_name.value=="";
-            joinNow.r_name.focus;
-            return false;
-
-        }
-
-
-        if(joinNow.r_id.value==""){
-            alert("아이디를 입력하세요");
-            joinNow.r_id.focus;
-            return false;
-        }
-
-        if(!idChk.test(joinNow.r_id.value())){
-            alert("간나색기 똑바로 입력하라우");
-            joinNow.r_id.value=="";
-            joinNow.r_id.focus;
-            return false;
-        }
-        if(joinNow.r_pw.value="")
+        // if(joinNow.r_id.value==""){
+        //     alert("아이디를 입력하세요");
+        //     joinNow.r_id.focus();
+        //     return false;
+        // }
+        //
+        // if(!idChk.test(joinNow.r_id.value)){
+        //     alert("간나색기 똑바로 입력하라우");
+        //     joinNow.r_id.value="";
+        //     joinNow.r_id.focus();
+        //     return false;
+        // }
+        //         if(joinNow.r_pw.value==""){
+        //             alert("비번이 비어있다우");
+        //             joinNow.r_pw.focus();
+        //             return false;
+        //         }
+        //
+        // if(!(pwChk.test(joinNow.r_pw.value))){
+        //     alert('영문 숫자 혼합으로 4~20자 까지 입력해주세요.');
+        //     joinNow.r_pw.value = "";
+        //     joinNow.r_pw.focus();
+        //     return false;
+        // }
+        //
+        //
+        //
+        // if(joinNow.r_pw2.value==""){
+        //     alert("비번 확인창이 비어있따우");
+        //     joinNow.r_pw2.focus();
+        //     return false;
+        // }
+        //
+        // if(!(joinNow.r_pw.value==joinNow.r_pw2.value)){
+        //     alert("비번이 동일하지 않다우 간나색기");
+        //     joinNow.r_pw2.value="";
+        //     joinNow.r_pw2.focus();
+        //     return false;
+        // }
+        //
+        //
+        //
+        // if(joinNow.email1.value==""){
+        //     alert("메일을 입력하라우");
+        //     joinNow.email1.focus;
+        //     return false;
+        // }
+        // if(joinNow.email2.value=""){
+        //     alert("메일을 입력하라우");
+        //     joinNow.email2.focus;
+        //     return false;
+        // }
+        // if(joinNow.email3.value=""){
+        //     alert("메일을 입력하라우");
+        //     joinNow.email3.focus;
+        //     return false;
+        // }
 
 
         return joinNow.submit();
 
     }
 
+      function idOverlapChk(){
+        $.ajax({
+         type:'post',
+         url:'./idOverlapChk',
+         data:{
+            r_id : $('#r_id').val()
+
+         },
+         success:function(data) {
+             if(data==1){
+                 $('#r_idChk').text('이미 사용중인 아이디입니다');
+                 $('#r_idChk').css('color','red');
+             }else{
+                 $('#r_idChk').text('사용 가능한 아이디입니다');
+                 $('#r_idChk').css('color','blue');
+                 return true;
+             }
+
+         },
+            error:function () {
+             alert("통신실패");
+
+            }
+        });
+
+
+    }
+
+
+    function emailChange(){
+
+        if(document.joinNow.email3.options[document.joinNow.email3.selectedIndex].value=='0'){
+
+            document.joinNow.email2.disabled=true;
+
+            document.joinNow.email2.value="";
+        }
+
+        if(document.joinNow.email3.options[document.joinNow.email3.selectedIndex].value=='1'){
+
+            document.joinNow.email2.disabled=false;
+
+            document.joinNow.email2.value="";
+
+            document.joinNow.email2.focus();
+
+        }else{
+
+            document.joinNow.email2.value = document.joinNow.email3.value;
+
+        }
+
+    }
 
 
 
+
+
+</script>
+
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+    function sample4_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var roadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('zip').value = data.zonecode;
+                document.getElementById("address").value = roadAddr;
+                document.getElementById("address").value = data.jibunAddress;
+
+                // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                if(roadAddr !== ''){
+                    document.getElementById("address").value = extraRoadAddr;
+                } else {
+                    document.getElementById("address").value = '';
+                }
+
+
+            }
+        }).open();
+    }
+</script>
+
+<script>
 
     var msiecheck = function () {
         var browser = navigator.userAgent.toLowerCase();
@@ -150,15 +299,15 @@
                     <div id="mnaviOpen"><img src="images/btn/btn_mnavi.gif" width="33" height="31" alt="메뉴열기" /></div>
                     <div id="mnaviClose"><img src="images/btn/btn_mnavi_close.gif" width="44" height="43" alt="메뉴닫기" /></div>
                     <ul>
-                        <li><a href="#">EVENT</a></li>
+                        <li><a href="event">EVENT</a></li>
                         <li><a href="#">CUSTOMER</a></li>
                         <li><a href="#">COMMUNITY</a></li>
                     </ul>
                 </div>
                 <div id="snb">
                     <ul>
-                        <li><a href="#">LOGIN</a></li>
-                        <li><a href="#">JOIN</a></li>
+                        <li><a href="login">LOGIN</a></li>
+                        <li><a href="join">JOIN</a></li>
                         <li><a href="#">MY PAGE</a></li>
                         <li><a href="#">CART</a></li>
                     </ul>
@@ -319,9 +468,9 @@
                                     <th scope="row"><span>아이디 *</span></th>
                                     <td>
                                         <ul class="pta">
-                                            <li class="r10"><input type="text" name="r_id" class="w134" /></li>
-                                            <li><a href="#" class="nbtnMini">중복확인</a></li>
-                                            <li class="pt5"><span class="mvalign">첫 글자는 영문으로 4~16자 까지 가능, 영문, 숫자와 특수기호(_)만 사용 가능</span></li>
+                                            <li class="r10"><input type="text" id="r_id" name="r_id" class="w134" onkeyup="idOverlapChk()" ></li>
+<%--                                            <li><button type="button" onclick="idOverlapChk()"  class="nbtnMini">중복확인</button></li>--%>
+                                            <li class="pt5"><span class="mvalign" id="r_idChk" name="r_idChk">첫 글자는 영문으로 4~16자 까지 가능, 영문, 숫자와 특수기호(_)만 사용 가능</span></li>
                                         </ul>
                                     </td>
                                 </tr>
@@ -352,10 +501,10 @@
                                         <ul class="pta">
                                             <li><input type="text" name="email1" class="w134" /></li>
                                             <li><span class="valign">&nbsp;@&nbsp;</span></li>
-                                            <li class="r10"><input type="text" name="email2" class="w134" /></li>
+                                            <li class="r10"><input type="text" name="email2" class="w134" disabled ="disabled" /></li>
                                             <li>
-                                                <select id="emailList" name="email3">
-                                                    <option value="0" selected="selected">선택하세요</option>
+                                                <select id="emailList" name="email3" onchange="emailChange()">
+                                                    <option value="0">선택하세요</option>
                                                     <option value="1">직접입력</option>
                                                     <option value="daum.net">daum.net</option>
                                                     <option value="hanmail.net">hanmail.net</option>
@@ -398,7 +547,7 @@
                                             <li>
                                                 <input type="text" class="w134" id="zip" name="zip"/>&nbsp;
                                             </li>
-                                            <li><a href="zip.html" class="addressBtn"><span>우편번호 찾기</span></a></li>
+                                            <li><button type="button" href="javascript:;" onclick="sample4_execDaumPostcode()" class="addressBtn"><span>우편번호 찾기</span></button></li>
                                             <li class="pt5"><input type="text" class="addressType" name="address" id="address" /></li>
                                             <li class="cb">
                                                 <span class="mvalign">※ 상품 배송 시 받으실 주소입니다. 주소를 정확히 적어 주세요.</span>
@@ -578,47 +727,7 @@
                     <!-- //Btn Area -->
 
 
-                    <script type="text/javascript" src="js/jquery.fancybox-1.3.4.pack.js"></script>
-                    <link rel="stylesheet" type="text/css" href="css/jquery.fancybox-1.3.4.css" />
-                    <script type="text/javascript">
-                        $(function(){
 
-                            // business input
-                            var firstchk = $("input:radio[name=business]:checked").attr("id");
-                            $(".businessTy").css("display","none");
-                            $("#partner").click(function(){
-                                $(".businessTy").css("display","block");
-                            });
-                            $("#general").click(function(){
-                                $(".businessTy").css("display","none");
-                            });
-                            $("#"+firstchk).click();
-
-
-                            // popup
-                            var winWidth = $(window).width();
-                            if(winWidth > 767){
-                                var layerCheck = 540;
-                            }else{
-                                var layerCheck = 320;
-                            }
-
-                            $(".addressBtn").fancybox({
-                                'autoDimensions'    : false,
-                                'showCloseButton'	: false,
-                                'width' : layerCheck,
-                                'padding' : 0,
-                                'type'			: 'iframe',
-                                'onComplete' : function() {
-                                    $('#fancybox-frame').load(function() { // wait for frame to load and then gets it's height
-                                        $('#fancybox-content').height($(this).contents().find('body').height());
-                                    });
-                                }
-                            });
-
-
-                        });
-                    </script>
 
 
                 </div>

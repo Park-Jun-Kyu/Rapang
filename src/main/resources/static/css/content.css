@@ -356,6 +356,7 @@
 .eventList ul li .txt .day{position:absolute; right:0; top:5px; color:#666;}
 
 
+
 /* reply */
 .replyWrite{width:100%; margin:50px 0 30px 0; overflow:hidden;}
 .replyWrite ul li{float:left;}
@@ -375,6 +376,9 @@
 .replyBox ul li.btn{text-align:right; height:20px; padding:3px 0 0 0;}
 .replyBox ul li.btn .rebtn{display:inline-block; width:43px; height:23px; line-height:22px; color:#777; font-weight:600; text-align:center; background:url('../images/btn/btn_daybtn.gif') left top no-repeat;}
 .replyBox ul li.btn .rebtn:hover{color:#777;}
+.replyBox ul li.btn .rebtn1{display:inline-block; width:43px; height:23px; line-height:22px; color:#777; font-weight:600; text-align:center; background:url('../images/btn/btn_daybtn.gif') left top no-repeat;}
+.replyBox ul li.btn .rebtn1:hover{color:#777;}
+.replyBox ul li.name p.password{position:absolute; right:-2px; top:0; line-height:20px;}
 .replynum{width:82px; height:20px; line-height:20px; border:1px #d9d9d9 solid; padding:0 0 0 5px;}
 .finReply{margin:50px 0 0 0;}
 

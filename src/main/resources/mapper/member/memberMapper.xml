@@ -7,10 +7,21 @@
 
     <insert id="join">
 
-    insert into rapang_member(r_name,r_id,r_pw,email,receive,zip,address,phone,sms,tel,birth,lunar_solar,business) values(#{r_name},#{r_name},#{r_pw},
+    insert into rapang_member(r_name,r_id,r_pw,email,receive,zip,address,phone,sms,tel,birth,lunar_solar,business) values(#{r_name},#{r_id},#{r_pw},
     #{email},#{receive},#{zip},#{address},#{phone},#{sms},#{tel},#{birth},#{lunar_solar},#{business})
 
 
     </insert>
+
+  <select id="idChk" resultType="int">
+
+    select count(*) from rapang_member where r_id=#{r_id}
+
+  </select>
+<select id="loginOk" resultType="LoginDto">
+
+    select count(*) count from rapang_member where r_id=#{r_id} and r_pw=#{r_pw}
+
+</select>
 
 </mapper>

@@ -68,6 +68,31 @@
         msiecheck();
     });
 
+    function Login_Ok(){
+        var r_id=loginOk.r_id.value;
+        var r_pw=loginOk.r_pw.value;
+
+        $.ajax({
+            type:'post',
+            url:'./loginOk',
+            data:{
+                r_id:r_id,
+                r_pw:r_pw
+            },
+            success:function(data){
+                if(data==1){
+                    alert("로그인 성공");
+                    location.href="event";
+                }else{
+                    alert("아디나 비번틀림");
+                }
+            },
+            error:function(request,status,error){
+                alert("통신불량");
+            }
+        })
+    }
+
     var msiecheck = function () {
         var browser = navigator.userAgent.toLowerCase();
         if (browser.indexOf('msie 6') != -1 ||
@@ -102,15 +127,15 @@
                     <div id="mnaviOpen"><img src="../images/btn/btn_mnavi.gif" width="33" height="31" alt="메뉴열기" /></div>
                     <div id="mnaviClose"><img src="../images/btn/btn_mnavi_close.gif" width="44" height="43" alt="메뉴닫기" /></div>
                     <ul>
-                        <li><a href="#">EVENT</a></li>
+                        <li><a href="event">EVENT</a></li>
                         <li><a href="#">CUSTOMER</a></li>
                         <li><a href="#">COMMUNITY</a></li>
                     </ul>
                 </div>
                 <div id="snb">
                     <ul>
-                        <li><a href="#">LOGIN</a></li>
-                        <li><a href="#">JOIN</a></li>
+                        <li><a href="login">LOGIN</a></li>
+                        <li><a href="join">JOIN</a></li>
                         <li><a href="#">MY PAGE</a></li>
                         <li><a href="#">CART</a></li>
                     </ul>
@@ -222,14 +247,15 @@
                         <h3>회원 로그인</h3>
                         <div class="informbox">
                             <div class="inform">
+                                <form method="post" name="loginOk" id="loginOk">
                                 <ul>
-                                    <li><input type="text" class="loginType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='loginType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
-                                    <li><input type="password" class="passType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='passType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
+                                    <li><input type="text" id="r_id" name="r_id" class="loginType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='loginType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
+                                    <li><input type="password" id="r_pw" name="r_pw" class="passType" onfocus="this.className='mfocus'" onblur="if (this.value.length==0) {this.className='passType'}else {this.className='mfocusnot'}" style="ime-mode:inactive;" /></li>
                                 </ul>
 
-                                <div class="btn"><a href="#" class="sbtn">로그인</a></div>
+                                <div class="btn"><button type="button" onclick="Login_Ok()" class="sbtn">로그인</a></div>
                                 <div class="chk"><input type="checkbox" id="idsave"/><label for="idsave">아이디 저장</label></div>
-
+                                </form>
                                 <div class="point">
                                     <p>아이디와 비밀번호를 잊으셨나요?</p>
                                     <a href="#" class="nbtn">아이디/비밀번호 찾기</a>
