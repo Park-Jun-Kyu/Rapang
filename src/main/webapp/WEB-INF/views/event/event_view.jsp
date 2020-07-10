@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="../css/reset.css?v=Y" />
     <link rel="stylesheet" type="text/css" href="../css/layout.css?v=Y" />
     <link rel="stylesheet" type="text/css" href="../css/content.css?v=Y" />
+    <script type="text/javascript" src="../js/comment.js"></script>
     <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script type="text/javascript" src="../js/top_navi.js"></script>
     <script type="text/javascript" src="../js/left_navi.js"></script>
@@ -32,13 +33,10 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="../js/html5.js"></script>
     <script type="text/javascript" src="../js/respond.min.js"></script>
+
+
     <![endif]-->
     <script type="text/javascript">
-        $(document).ready(function() {
-
-            getCommentList('${event_view.event_no}','${r_id}');
-
-        });
     </script>
 <%--  모멘트 js 가져오기--%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
@@ -66,6 +64,12 @@
 <!--//익스레이어팝업-->
 <!--IE 6,7,8 사용자에게 브라우저 업데이터 설명 Div 관련 스크립트-->
 <script type="text/javascript">
+
+    $(document).ready(function() {
+
+        getCommentList('${event_view.event_no}','${r_id}');
+
+    });
 
     var settimediv = 200000; //지속시간(1000= 1초)
     var msietimer;
@@ -96,39 +100,7 @@
         clearTimeout(msietimer);
     }
 
-    function commentWrite(){
 
-        var loginCheck =writeForm.r_id.value;
-
-        if(loginCheck==""){
-            alert('로그인후 작성 가능합니다');
-            location.href='login';
-            return false;
-        }
-
-
-        var commentInfo = $("form[name=writeForm]").serialize();
-
-        $.ajax({
-            type: 'post',
-            url: './comment_write',
-            data: commentInfo,
-            dataType: 'json',
-
-
-            success:function(json) {
-            alert("댓글 달기 성공");
-            location.reload();
-
-
-            },
-            error:function(xhr, status, error) {
-
-                location.reload();
-            }
-        });
-
-    }
 </script>
 <jsp:useBean id="now" class="java.util.Date" />
 <fmt:formatDate value="${comment_date}" pattern="yyyy/MM/dd" var="comment_date" />
@@ -137,124 +109,11 @@
 <script type="text/javascript">
 
 
-    function commentModify(a){
 
-
-       var comment_no=a.comment_no.value;
-       var content=a.content.value;
-       var event_no=a.event_no.value;
-
-        $.ajax({
-           type:'post',
-            url:'./comment_modify',
-            data:{
-
-            content:content,
-            event_no:event_no,
-            comment_no:comment_no
-
-            },
-            success:function(data) {
-                alert("수정 성공");
-                location.reload();
-            },
-            error:function(request,status,error) {
-                alert("수정 실패");
-                location.reload();
-            }
-        });
-
-    }
-
-
-    function commentDelete(comment_no){
-
-        $.ajax({
-            type:'post',
-            url:'./comment_delete',
-            data:{
-
-                comment_no : comment_no
-            },
-
-            success:function(){
-                alert('삭제 완료');
-                location.reload();
-        }, error:function(request,status,error) {
-
-                location.reload();
-
-            }
-
-        })
-
-    }
-
-
-    function getCommentList(event_no,r_id){
-
-        $.ajax({
-           type:'post',
-            url:'./getCommentList',
-            data: {event_no: event_no},
-            success:function(data){
-
-               var html="";
-               if(data.length>0) {
-                   for (var i = 0; i < data.length; i++) {
-                       html += '<form name="comentForm">';
-                       html += '<ul>';
-                       html += '<li class="name">' + data[i].r_id + '<span>     ['+moment(new Date(data[i].comment_date)).format('YYYY-MM-DD hh:mm:ss')+']<p class="password">비밀번호&nbsp;&nbsp;<input type="password" class="replynum" /></p></span></li>';
-                       html += '<li class="txt">' + data[i].content + ' </li>';
-                       if(data[i].r_id==r_id) {
-                       html += '<li class="btn">';
-                           html += '<a href="javascript:;" onclick="modiShow(' + data[i].comment_no + ')" class="rebtn">수정</a>';
-                           html += '<a href="javascript:;" onclick="commentDelete(' + data[i].comment_no + ')" class="rebtn">삭제</a></li>';
-                           html += '</ul>'
-                           html += '<ul id="modifyWindow' + data[i].comment_no + '" style="display: none;">';
-                           html += '<li class="name">' + data[i].r_id + ' <span>  [' + moment(new Date(data[i].comment_date)).format('YYYY-MM-DD hh:mm:ss') + ']</span></li>';
-                           html += '<li class="txt"> <textarea class="replyType" name="content" id="mos' + data[i].comment_no + '">' + data[i].content + '</textarea><input type="text" hidden="hidden" value="' + data[i].content + '" name="' + data[i].comment_no + '"></li>';
-                           html += '<input type="text" hidden="hidden" id="' + data[i].comment_no + '" value=' + data[i].comment_no + '">';
-                           html += '<input type="text" hidden="hidden" name="event_no"  value="'+data[i].event_no+'">';
-                           html += '<input type="text" hidden="hidden" name="comment_no" value="'+data[i].comment_no+'">';
-                           html += '<input type="text" hidden="hidden" name="r_id"  value="'+data[i].r_id+'">';
-                           html += '<li class="btn">';
-                           html += '<button type="button" class="rebtn1" onclick="commentModify(this.form)">수정</button>';
-                           html += '<a href="javascript:;" class="rebtn1" onclick="modiCansel(' + data[i].comment_no + ')"> 취소</a> </li>';
-                           html += '</ul>';
-                       }else{
-                           html += '</ul>';
-                       }
-                       html += '</form>';
-                   }
-
-               }else{
-                        html += "<li class='name'></li><br>";
-                        html += "<li class='txt'>댓글이 없습니다</li>";
-               }
-                   $("#commentViewForm").html(html);
-
-               },
-               error:function(request,status,error) {
-                   alert('댓글 리스트 목록 불러오기 실패');
-
-               }
-        });
-    }
 </script>
 
 <script type="text/javascript" >
-    function modiShow(a){
-        $('#modifyWindow'+a).show();
-        $('.rebtn').hide();
-    }
 
-    function modiCansel(b){
-        $('#modifyWindow'+b).hide();
-        $('.rebtn').show();
-        var k = $("input[name="+b+"]").val();
-        $('#mos'+b).val(k);
-    }
 
 </script>
 
@@ -444,14 +303,14 @@
                             <ul>
                                 <li class="in">
                                     <p class="txt">총 <span class="orange">3</span> 개의 댓글이 달려있습니다.</p>
-                                    <p class="password">비밀번호&nbsp;&nbsp;<input type="password" class="replynum" /></p>
-                                    <textarea name="content" id="content" class="replyType"></textarea>
+                                    <p class="password">비밀번호&nbsp;&nbsp;<input type="password" id="r_pw" name="r_pw" class="replynum" /></p>
+                                    <textarea name="content" id="content" class="replyType" value="${event_view.content}"></textarea>
                                     <input type="text" hidden="hidden" name="event_no" value="${event_view.event_no}">
                                     <input type="text" hidden="hidden" id="r_id" name="r_id" value="${r_id}">
                                 </li>
                                 <li class="btn"><button type="button" onclick="commentWrite()" class="replyBtn">등록</a></li>
                             </ul>
-                            <p class="ntic">ㅎㅇ</p>
+                            <p class="ntic">일하고싶당</p>
                             </form>
                         </div>
 

@@ -9,6 +9,16 @@ public class RapangCommentDTO {
     String r_id;
     String content;
     Date comment_date;
+    String r_pw;
+
+
+    public String getR_pw() {
+        return r_pw;
+    }
+
+    public void setR_pw(String r_pw) {
+        this.r_pw = r_pw;
+    }
 
     public int getComment_no() {
         return comment_no;

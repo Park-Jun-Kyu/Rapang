@@ -52,6 +52,7 @@ public class EventController {
 
 
     @RequestMapping("comment_write")
+    @ResponseBody
     public String comment_write(Model model,RapangCommentDTO commentDTO,HttpSession session){
         commentDTO.setR_id((String) session.getAttribute("r_id"));
         model.addAttribute("r_id",((String)session.getAttribute("r_id")));
@@ -64,6 +65,7 @@ public class EventController {
     }
 
     @RequestMapping("comment_delete")
+    @ResponseBody
     public String comment_delete(int comment_no,HttpSession session,RapangCommentDTO commentDTO){
         commentDTO.setR_id((String) session.getAttribute("r_id"));
         eventService.commet_delete(comment_no);

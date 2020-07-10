@@ -25,7 +25,7 @@
     </select>
      <insert id="commentWrite">
 
-        insert into RAPANG_COMMENT values(COMMENT_SEQ.nextval,#{event_no},#{r_id},#{content},sysdate)
+        insert into RAPANG_COMMENT values(COMMENT_SEQ.nextval,#{event_no},#{r_id},#{content},sysdate,#{r_pw})
 
       </insert>
 
