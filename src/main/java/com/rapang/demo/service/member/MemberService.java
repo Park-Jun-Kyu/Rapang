@@ -7,11 +7,11 @@ import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 
 public interface MemberService {
-
+    //회원 가입
     public void join(Memberdto memberdto) throws ParseException;
-
+    //아이디 중복 체크
     public int idOverlapChk(String r_id);
-
+    //로그인
     public LoginDto loginOk(LoginDto loginDto);
 
 }

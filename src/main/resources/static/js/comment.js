@@ -12,7 +12,7 @@ function commentWrite(){
     }
 
 
-    var commentInfo = $("form[name=writeForm]").serialize();
+
     // var r_pw = writeForm.r_pw.value;
      var content = writeForm.content.value;
 
@@ -20,21 +20,13 @@ function commentWrite(){
     $.ajax({
         type: 'post',
         url: './comment_write',
-        data: {
-            commentInfo
-        },
+        data: $('#writeForm').serialize(),
         success:function(data) {
-              alert("그냥댓글 달기 성공");
+           alert('댓글달기 성공');
               location.reload();
         },
         error:function(request,status,error) {
-        //     if(r_pw==null){
-        //         $('#txt').text("비밀글입니다");
-        //         alert("댓글 달기 성공");
-        //         location.reload();
-        //     }else{
-        //         var k =  $('#secretText').text("비밀글 입니다");
-        //           $('#txt').text(k);
+
                 alert("통신 불량");
                 location.reload();
         //     }

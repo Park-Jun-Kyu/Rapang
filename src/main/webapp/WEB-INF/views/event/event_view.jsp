@@ -310,7 +310,7 @@
                                 </li>
                                 <li class="btn"><button type="button" onclick="commentWrite()" class="replyBtn">등록</a></li>
                             </ul>
-                            <p class="ntic">일하고싶당</p>
+                            <p class="ntic"></p>
                             </form>
                         </div>
 

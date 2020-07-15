@@ -16,7 +16,7 @@ public class MemberController {
 
     @Autowired
     MemberService memberService;
-
+    //회원 가입
     @RequestMapping("join")
     public String join(Memberdto memberdto){
 
@@ -24,7 +24,7 @@ public class MemberController {
         return "member/join";
 
     }
-
+    //로그인 페이지 뷰
     @RequestMapping("login")
     public String login(){
 
@@ -32,7 +32,7 @@ public class MemberController {
         return "member/login";
 
     }
-
+    //로그인
     @RequestMapping("joinNow")
     public String joinNow(Memberdto memberdto) throws ParseException {
 
@@ -45,7 +45,7 @@ public class MemberController {
 
     }
 
-
+    //아이디 중복 체크
     @RequestMapping("idOverlapChk")
     @ResponseBody
     public int idOverlapChk(String r_id){
@@ -54,7 +54,7 @@ public class MemberController {
 
         return memberService.idOverlapChk(r_id);
     }
-
+    //로그인 ajax
     @RequestMapping("loginOk")
     @ResponseBody
     public int loginOk(HttpSession session, LoginDto loginDto){
