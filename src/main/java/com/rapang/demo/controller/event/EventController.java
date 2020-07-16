@@ -20,7 +20,7 @@ public class EventController {
 
     @Autowired
     EventService eventService;
-
+    //이벤트 페이지 출력
     @RequestMapping("event")
     public String event(Model model){
 
@@ -29,6 +29,7 @@ public class EventController {
         return "event/event";
     }
 
+    //이벤트 상새내용 출력
     @RequestMapping("event_view")
     public String event_view(Model model, HttpSession session, EventDTO eventDTO, RapangCommentDTO commentDTO,int event_no){
 
@@ -39,7 +40,7 @@ public class EventController {
 
         return "event/event_view";
     }
-
+    //댓글 리스트 ajax 출력
     @RequestMapping("getCommentList")
     @ResponseBody
     public List<RapangCommentDTO> getCommentList(int event_no){
@@ -50,7 +51,7 @@ public class EventController {
 
 
 
-
+    //댓글 작성 ajax
     @RequestMapping("comment_write")
     @ResponseBody
     public String comment_write(Model model,RapangCommentDTO commentDTO,HttpSession session){
@@ -63,7 +64,7 @@ public class EventController {
 
         return "success";
     }
-
+    //댓글 삭제 ajax
     @RequestMapping("comment_delete")
     @ResponseBody
     public String comment_delete(int comment_no,HttpSession session,RapangCommentDTO commentDTO){
@@ -72,7 +73,7 @@ public class EventController {
         System.out.println("삭제 글번호 :"+ comment_no);
         return "success";
     }
-
+    //댓글 수정 ajax
     @RequestMapping("comment_modify")
     @ResponseBody
     public String comment_modify(RapangCommentDTO commentDTO){

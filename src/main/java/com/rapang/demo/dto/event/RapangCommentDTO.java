@@ -1,7 +1,7 @@
 package com.rapang.demo.dto.event;
 
 import java.util.Date;
-
+//수정완료
 public class RapangCommentDTO {
 
     int comment_no;

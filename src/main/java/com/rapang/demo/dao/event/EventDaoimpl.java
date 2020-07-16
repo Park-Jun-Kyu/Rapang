@@ -48,5 +48,5 @@ public class EventDaoimpl implements EventDao {
         sqlSession.update("event.commentModify",commentDTO);
     }
 
-
+    //
 }
