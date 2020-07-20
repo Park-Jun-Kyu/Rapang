@@ -19,4 +19,6 @@ public interface EventDao {
     public void commet_delete(int comment_no);
     //이벤트 상세내용 댓글 수정
     public void comment_modify(RapangCommentDTO commentDTO);
+    //이벤트 댓글 갯수 표시
+    public RapangCommentDTO comment_count(RapangCommentDTO commentDTO);
 }

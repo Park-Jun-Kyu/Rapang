@@ -11,12 +11,6 @@ function commentWrite(){
         return false;
     }
 
-
-
-    // var r_pw = writeForm.r_pw.value;
-     var content = writeForm.content.value;
-
-        alert(content);
     $.ajax({
         type: 'post',
         url: './comment_write',
@@ -84,6 +78,30 @@ function commentDelete(comment_no){
     })
 }
 
+function getCount(event_no){
+
+    $.ajax({
+        type:'post',
+        url:'./comment_count',
+        data: $('#writeForm').serialize(),
+            event_no:event_no,
+
+        success:function(data){
+
+            var html = "";
+            html +="총 <span class='orange'>"+data+"</span> 개의 댓글이 달려있습니다.";
+            $("#getCount").html(html);
+        },
+        error:function(request,status,error) {
+            alert("댓글 갯수 통신 실패");
+        }
+
+
+
+    })
+}
+
+
 
 function getCommentList(event_no,r_id){
 
@@ -150,4 +168,3 @@ function modiCansel(b){
     var k = $("input[name="+b+"]").val();
     $('#mos'+b).val(k);
 }
-

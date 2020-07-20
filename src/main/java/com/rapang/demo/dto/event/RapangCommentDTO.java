@@ -10,7 +10,15 @@ public class RapangCommentDTO {
     String content;
     Date comment_date;
     String r_pw;
+    int count;
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     public String getR_pw() {
         return r_pw;

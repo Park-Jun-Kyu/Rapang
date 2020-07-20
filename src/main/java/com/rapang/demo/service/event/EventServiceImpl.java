@@ -51,5 +51,11 @@ public class EventServiceImpl implements EventService {
   eventDao.comment_modify(commentDTO);
  }
 
+ @Override
+ public RapangCommentDTO comment_count(RapangCommentDTO commentDTO) {
+
+  return eventDao.comment_count(commentDTO);
+ }
+
 
 }

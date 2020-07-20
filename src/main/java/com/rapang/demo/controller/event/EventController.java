@@ -9,6 +9,8 @@ import com.rapang.demo.service.event.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -84,7 +86,14 @@ public class EventController {
         return "success";
     }
 
-
+    @RequestMapping("comment_count")
+    @ResponseBody
+    public int comment_count(RapangCommentDTO commentDTO){
+        int count = eventService.comment_count(commentDTO).getCount();
+        System.out.println("이벤트 넘버:"+eventService.comment_count(commentDTO).getEvent_no());
+        System.out.println("댓글 갯수:"+count);
+        return count;
+    }
 
 
 }

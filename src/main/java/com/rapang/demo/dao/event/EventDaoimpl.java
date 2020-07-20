@@ -2,6 +2,7 @@ package com.rapang.demo.dao.event;
 
 import com.rapang.demo.dto.event.EventDTO;
 import com.rapang.demo.dto.event.RapangCommentDTO;
+import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -48,5 +49,10 @@ public class EventDaoimpl implements EventDao {
         sqlSession.update("event.commentModify",commentDTO);
     }
 
-    //
+    @Override
+    public RapangCommentDTO comment_count(RapangCommentDTO commentDTO) {
+        return sqlSession.selectOne("event.commentCount",commentDTO);
+    }
+
+
 }

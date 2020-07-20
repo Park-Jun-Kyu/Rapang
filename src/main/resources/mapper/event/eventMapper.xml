@@ -39,6 +39,11 @@
 
     </update>
 
+    <select id="commentCount" resultType="RapangCommentDTO">
+        select count(*) count from rapang_comment where event_no=#{event_no}
+
+    </select>
+
 
 
 </mapper>

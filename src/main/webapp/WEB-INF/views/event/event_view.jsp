@@ -68,7 +68,7 @@
     $(document).ready(function() {
 
         getCommentList('${event_view.event_no}','${r_id}');
-
+        getCount('${event_view.event_no}');
     });
 
     var settimediv = 200000; //지속시간(1000= 1초)
@@ -302,13 +302,28 @@
                             <form id="writeForm" name="writeForm" method="post">
                             <ul>
                                 <li class="in">
-                                    <p class="txt">총 <span class="orange">3</span> 개의 댓글이 달려있습니다.</p>
-                                    <p class="password">비밀번호&nbsp;&nbsp;<input type="password" id="r_pw" name="r_pw" class="replynum" /></p>
-                                    <textarea name="content" id="content" class="replyType" value="${event_view.content}"></textarea>
-                                    <input type="text" hidden="hidden" name="event_no" value="${event_view.event_no}">
-                                    <input type="text" hidden="hidden" id="r_id" name="r_id" value="${r_id}">
+                                    <p class="txt" id="getCount"></p>
+                                    <c:choose>
+                                        <c:when test="${r_id == null}">
+                                            <textarea name="content" id="content" class="replyType"
+                                                      readonly="readonly" value="먼저 로그인을 해야 합니다.">먼저 로그인을 해야 합니다.
+                                            </textarea>
+                                            <input type="text" hidden="hidden" name="event_no" value="${event_view.event_no}">
+                                            <input type="text" hidden="hidden" id="r_id" name="r_id" value="${r_id}">
                                 </li>
-                                <li class="btn"><button type="button" onclick="commentWrite()" class="replyBtn">등록</a></li>
+                                 <li class="btn"><button type="button" onclick="commentWrite()" class="replyBtn">등록</a></li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <p class="password">비밀번호&nbsp;&nbsp;<input type="password" id="r_pw" name="r_pw" class="replynum" /></p>
+                                            <textarea name="content" id="content" class="replyType" value="${event_view.content}"></textarea>
+                                            <input type="text" hidden="hidden" name="event_no" value="${event_view.event_no}">
+                                            <input type="text" hidden="hidden" id="r_id" name="r_id" value="${r_id}">
+                                            </li>
+                                            <li class="btn"><button type="button" onclick="commentWrite()" class="replyBtn">등록</a></li>
+                                        </c:otherwise>
+                                    </c:choose>
+
+
                             </ul>
                             <p class="ntic"></p>
                             </form>
@@ -323,7 +338,7 @@
 <%--                        <fmt:formatDate value="${commentList.comment_date}" pattern="yyyy/MM/dd" var="today" />--%>
 <%--                        <form id="modifyForm" name="modifyForm" method="post" >--%>
                         <div class="replyBox" id="commentViewForm">
-
+<%--                                ajax--%>
 
 <%--                            댓글 출력--%>
 <%--                            <ul>--%>
