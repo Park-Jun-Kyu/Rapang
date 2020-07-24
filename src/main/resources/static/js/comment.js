@@ -95,9 +95,6 @@ function getCount(event_no){
         error:function(request,status,error) {
             alert("댓글 갯수 통신 실패");
         }
-
-
-
     })
 }
 

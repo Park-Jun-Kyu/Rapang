@@ -13,5 +13,8 @@ public interface MemberService {
     public int idOverlapChk(String r_id);
     //로그인
     public LoginDto loginOk(LoginDto loginDto);
+    //이메일 인증
+    public boolean send(String subject, String text, String from, String to, String filePath);
+
 
 }

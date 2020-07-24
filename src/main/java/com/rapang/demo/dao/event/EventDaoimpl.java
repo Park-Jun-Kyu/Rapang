@@ -48,7 +48,7 @@ public class EventDaoimpl implements EventDao {
 
         sqlSession.update("event.commentModify",commentDTO);
     }
-
+    //댓글 갯수 표시
     @Override
     public RapangCommentDTO comment_count(RapangCommentDTO commentDTO) {
         return sqlSession.selectOne("event.commentCount",commentDTO);

@@ -24,6 +24,15 @@ public class MemberController {
         return "member/join";
 
     }
+    //회원가입 완료 페이지
+    @RequestMapping("joinComplete")
+    public String joinComplete(){
+
+
+        return "member/joinComplete";
+    }
+
+
     //로그인 페이지 뷰
     @RequestMapping("login")
     public String login(){
@@ -32,6 +41,9 @@ public class MemberController {
         return "member/login";
 
     }
+
+
+
     //로그인
     @RequestMapping("joinNow")
     public String joinNow(Memberdto memberdto) throws ParseException {
@@ -41,7 +53,7 @@ public class MemberController {
         System.out.println(memberdto.getTel());
         System.out.println(memberdto.getBirth());
 
-        return "member/login";
+        return "member/joinComplete";
 
     }
 
@@ -64,6 +76,7 @@ public class MemberController {
         }
         return count;
     }
+
 
 
 }

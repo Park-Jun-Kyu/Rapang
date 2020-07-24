@@ -18,6 +18,7 @@
     select count(*) from rapang_member where r_id=#{r_id}
 
   </select>
+
 <select id="loginOk" resultType="LoginDto">
 
     select count(*) count from rapang_member where r_id=#{r_id} and r_pw=#{r_pw}

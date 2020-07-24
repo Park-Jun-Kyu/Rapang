@@ -85,7 +85,7 @@ public class EventController {
         System.out.println("수정 내용 :" +commentDTO.getContent());
         return "success";
     }
-
+    //댓글 갯수 표시
     @RequestMapping("comment_count")
     @ResponseBody
     public int comment_count(RapangCommentDTO commentDTO){

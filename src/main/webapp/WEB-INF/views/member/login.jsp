@@ -71,7 +71,6 @@
     function Login_Ok(){
         var r_id=loginOk.r_id.value;
         var r_pw=loginOk.r_pw.value;
-
         $.ajax({
             type:'post',
             url:'./loginOk',
@@ -84,7 +83,7 @@
                     alert("로그인 성공");
                     location.href="event";
                 }else{
-                    alert("아디나 비번틀림");
+                    alert("아이디나 비밀번호 틀림");
                 }
             },
             error:function(request,status,error){

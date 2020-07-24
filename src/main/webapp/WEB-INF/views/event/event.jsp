@@ -112,8 +112,8 @@
                 </div>
                 <div id="snb">
                     <ul>
-                        <li><a href="#">LOGIN</a></li>
-                        <li><a href="#">JOIN</a></li>
+                        <li><a href="login">LOGIN</a></li>
+                        <li><a href="join">JOIN</a></li>
                         <li><a href="#">MY PAGE</a></li>
                         <li><a href="#">CART</a></li>
                     </ul>
@@ -231,8 +231,8 @@
                                     <fmt:formatDate value="${event.end_date}" pattern="yyyy/MM/dd" var="end_date"/>
 
 
-                                <c:choose>
-                                    <c:when test="${today<end_date}">
+<%--                                <c:choose>--%>
+<%--                                    <c:when test="${today<end_date}">--%>
                                 <li>
                                     <div class="img">
                                         <a href="event_view?event_no=${event.event_no}"><img src="eventUpload/${event.thumbnail}" alt="진행중 이벤트" /></a>
@@ -242,8 +242,8 @@
                                         <div class="day">이벤트 기간 : <fmt:formatDate value="${event.start_date}" pattern="yyyy/MM/dd"/> ~    <fmt:formatDate value="${event.end_date}" pattern="yyyy/MM/dd"/></div>
                                     </div>
                                 </li>
-                                    </c:when>
-                                </c:choose>
+<%--                                    </c:when>--%>
+<%--                                </c:choose>--%>
                             </ul>
                         </c:forEach>
                         </div>
